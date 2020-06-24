@@ -1,0 +1,38 @@
+<div class="centered">
+    <div id="amount">
+        <h1>Amount</h1>
+        <h2>{{ amount }} Ft</h2>
+    </div>
+    <div id="add-item">
+        <h3>Add item</h3>
+        <label>Title: </label><input #itemName class="add-input">
+        <label>Amount: </label><input #itemAmount class="add-input">
+        <br/>
+        <button (click) = "add(itemName.value, itemAmount.value); itemName.value = ''; itemAmount.value = ''">Add new item</button>
+    </div>
+</div>
+
+<div id="lists">
+    <div id="income">
+        <h2>Income</h2>
+        <ul>
+            <ng-container *ngFor="let item of items">
+                <li *ngIf="item.amount > 0 || item.amount == 0" >
+                    <app-item-detail  [item] = "item"></app-item-detail>
+                    <button class="delete" title="Delete item" (click)="delete(item)">X</button>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+    <div id="expense">
+        <h2>Expenses</h2>
+        <ul>
+            <ng-container *ngFor="let item of items">
+                <li *ngIf="item.amount < 0" >
+                    <app-item-detail  [item] = "item"></app-item-detail>
+                    <button class="delete" title="Delete item" (click)="delete(item)">X</button>
+                </li>
+            </ng-container>
+        </ul>
+    </div>
+</div>
